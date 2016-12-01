@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.qwerty123.cookhelper.View.Activities.RecipeDetailViewActivity;
 import com.qwerty123.cookhelper.Model.RecipeBook.Recipe;
-import com.qwerty123.cookhelper.Model.RecipeBookController;
+import com.qwerty123.cookhelper.Controller.RecipeBookController;
 import com.qwerty123.cookhelper.View.RecipeListAdapter;
 import com.qwerty123.cookhelper.R;
 

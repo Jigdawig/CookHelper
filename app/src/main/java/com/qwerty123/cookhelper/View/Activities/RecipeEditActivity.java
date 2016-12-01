@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.qwerty123.cookhelper.Model.RecipeBook.PreparationStep;
 import com.qwerty123.cookhelper.Model.RecipeBook.Recipe;
-import com.qwerty123.cookhelper.Model.RecipeBookController;
+import com.qwerty123.cookhelper.Controller.RecipeBookController;
 import com.qwerty123.cookhelper.R;
 import com.qwerty123.cookhelper.View.StepEditListAdapter;
 
