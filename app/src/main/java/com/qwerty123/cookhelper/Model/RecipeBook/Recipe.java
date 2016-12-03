@@ -29,9 +29,9 @@ public class Recipe implements JSONSerializable
     }
 
     //Constructor initialize recipe from a json Object
-    public Recipe(JSONObject character)
+    public Recipe(JSONObject recipe)
     {
-        initializeFromJSON(character);
+        initializeFromJSON(recipe);
     }
 
     public String getName()
@@ -99,7 +99,6 @@ public class Recipe implements JSONSerializable
     }
 
     @Override
-    //Stores the data into json files
     public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
         JSONArray ingredientArray = new JSONArray();
@@ -128,14 +127,12 @@ public class Recipe implements JSONSerializable
         {
             System.err.println("Error while converting Recipe details to JsonObject");
             e.printStackTrace();
-            //jsonObject = null;
         }
 
         return jsonObject;
     }
 
     @Override
-    //This is so we can actually load data from the json files
     public void initializeFromJSON(JSONObject jsonObject) {
         if (jsonObject != null)
         {
@@ -155,7 +152,7 @@ public class Recipe implements JSONSerializable
                 JSONArray prepSteps = jsonObject.getJSONArray("PreparationSteps");
                 preparationSteps = new PreparationStep[prepSteps.length()];
                 for (int i = 0; i < prepSteps.length(); i++) {
-                    preparationSteps[i] = new PreparationStep((String)prepSteps.get(i), ingredients);
+                    preparationSteps[i] = new PreparationStep((String)prepSteps.get(i));
                 }
 
 

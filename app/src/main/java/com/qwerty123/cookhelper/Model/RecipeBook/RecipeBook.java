@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class RecipeBook
 {
-    public Map<String,ArrayList> lookUpTable;
+    public Map<String, ArrayList> lookUpTable;
     public static int SAMPLE_LIST_SIZE = 20;
 
     public static final CulturalCategory[] sampleCategories = {
@@ -82,7 +82,7 @@ public class RecipeBook
 
     private static PreparationStep[] createSampleSteps(RecipeBook recipeBook, Ingredient[] ingredients)
     {
-        int numPairs = ingredients.length/2;
+        int numPairs = ingredients.length / 2;
         boolean addSingle = ingredients.length % 2 == 1;
 
         int numSteps = numPairs + (addSingle ? 1 : 0);
@@ -90,7 +90,7 @@ public class RecipeBook
         PreparationStep[] steps = new PreparationStep[numSteps];
 
         int stepIndex = 0;
-        for(int i = 0; i <= numPairs; i += 2)
+        for (int i = 0; i <= numPairs; i += 2)
         {
             Ingredient[] stepIngredients = new Ingredient[2];
 
@@ -105,10 +105,10 @@ public class RecipeBook
             ++stepIndex;
         }
 
-        if(addSingle)
+        if (addSingle)
         {
-            Ingredient[] singleIngredient = {ingredients[ingredients.length-1]};
-            steps[steps.length-1] = new PreparationStep(recipeBook,
+            Ingredient[] singleIngredient = {ingredients[ingredients.length - 1]};
+            steps[steps.length - 1] = new PreparationStep(recipeBook,
                     String.format("Add %1$s", "#" + singleIngredient));
         }
 
@@ -121,18 +121,18 @@ public class RecipeBook
 
         Ingredient[] ingredients = new Ingredient[numIngredients];
 
-        for(int i = 0; i < numIngredients; ++i)
+        for (int i = 0; i < numIngredients; ++i)
         {
             int index = random.nextInt(sampleIngredients.length);
 
             boolean different = true;
 
-            for(int j = 0; j < i; ++j)
+            for (int j = 0; j < i; ++j)
             {
                 different = different && ingredients[j] != sampleIngredients[index];
             }
 
-            if(different)
+            if (different)
             {
                 ingredients[i] = sampleIngredients[index];
             }
@@ -145,7 +145,7 @@ public class RecipeBook
         return ingredients;
     }
 
-    //NOTE: For the dave and delete
+    //NOTE: For the save and delete
     //NOTE: It might be better to have these methods
     //NOTE: In RecipeBookController and have an update
     //NOTE: method in RecipeBook that changes the
@@ -155,23 +155,25 @@ public class RecipeBook
 
     /**
      * Add a recipe to the recipe book.
+     *
      * @param newRecipe The recipe to be added.
-     * @throws DuplicateRecipeException
-     * If the recipe was added alters Recipe[] recipes to match
-     * new state, else the exception is thrown
+     * @throws DuplicateRecipeException If the recipe was added alters Recipe[] recipes to match
+     *                                  new state, else the exception is thrown
      */
-    public void addRecipe(Context context, Recipe newRecipe)
-        throws DuplicateRecipeException {
-    RecipeBookSaveController.saveNewRecipe(context, newRecipe);
+    public void addRecipe(Context context, Recipe newRecipe) throws DuplicateRecipeException
+    {
+        RecipeBookSaveController.saveNewRecipe(context, newRecipe);
         recipes = RecipeBookSaveController.loadAllRecipes(context);
     }
 
     /**
      * Removes a recipe from the recipe book.
+     *
      * @param recipe The recipe to be deleted.
-     * Alters Recipe[] recipes to match new state
+     *               Alters Recipe[] recipes to match new state
      */
-    public void deleteRecipe(Context context, Recipe recipe){
+    public void deleteRecipe(Context context, Recipe recipe)
+    {
         RecipeBookSaveController.deleteRecipe(context, recipe);
         recipes = RecipeBookSaveController.loadAllRecipes(context);
     }
@@ -201,56 +203,71 @@ public class RecipeBook
         }
     }
 
-    private void createLookUpTable(){
+    private void createLookUpTable()
+    {
         lookUpTable = new HashMap<String, ArrayList>();
         //List<Recipe> recipeList = new ArrayList<Recipe>();
         List<String> MTKeyList = new ArrayList<String>();
         List<String> CCKeyList = new ArrayList<String>();
         List<String> IngredientKeyList = new ArrayList<String>();
 
-        for (Recipe recipe: recipes) {
+        for (Recipe recipe : recipes)
+        {
             MealType mealtype = recipe.getMealType();
-            if(!lookUpTable.containsKey(mealtype.toString())){
+            if (!lookUpTable.containsKey(mealtype.toString()))
+            {
                 MTKeyList.add(mealtype.toString());
             }
             CulturalCategory culturalCat = recipe.getCulturalCategory();
-            if(!lookUpTable.containsKey(culturalCat.toString())){
+            if (!lookUpTable.containsKey(culturalCat.toString()))
+            {
                 CCKeyList.add(culturalCat.toString());
             }
 
             String[] ingredients = recipe.getIngredientsEnumeration().split(", ");
-            for (String ingredient: ingredients) {
-                if(!lookUpTable.containsKey(ingredient)){
+            for (String ingredient : ingredients)
+            {
+                if (!lookUpTable.containsKey(ingredient))
+                {
                     IngredientKeyList.add(ingredient);
                 }
             }
         }
 
-        for (String key: MTKeyList) {
+        for (String key : MTKeyList)
+        {
             List<Recipe> recipeList = new ArrayList<Recipe>();
-            for (Recipe recipe: recipes) {
-                if (key.equals(recipe.getMealType().toString())) {
+            for (Recipe recipe : recipes)
+            {
+                if (key.equals(recipe.getMealType().toString()))
+                {
                     recipeList.add(recipe);
                 }
                 lookUpTable.put(key, (ArrayList) recipeList);
             }
         }
 
-        for (String key: CCKeyList) {
+        for (String key : CCKeyList)
+        {
             List<Recipe> recipeList = new ArrayList<Recipe>();
-            for (Recipe recipe: recipes) {
-                if (key.equals(recipe.getCulturalCategory().toString())) {
+            for (Recipe recipe : recipes)
+            {
+                if (key.equals(recipe.getCulturalCategory().toString()))
+                {
                     recipeList.add(recipe);
                 }
                 lookUpTable.put(key, (ArrayList) recipeList);
             }
         }
 
-        for (String key: IngredientKeyList) {
+        for (String key : IngredientKeyList)
+        {
             List<Recipe> recipeList = new ArrayList<Recipe>();
-            for (Recipe recipe: recipes) {
+            for (Recipe recipe : recipes)
+            {
                 String[] ingredients = recipe.getIngredientsEnumeration().split(", ");
-                if (Arrays.asList(ingredients).contains(key)) {
+                if (Arrays.asList(ingredients).contains(key))
+                {
                     recipeList.add(recipe);
                 }
                 lookUpTable.put(key, (ArrayList) recipeList);

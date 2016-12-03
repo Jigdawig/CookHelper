@@ -14,8 +14,6 @@ import com.qwerty123.cookhelper.Exceptions.DuplicateRecipeException;
 import com.qwerty123.cookhelper.Model.RecipeBook.PreparationStep;
 import com.qwerty123.cookhelper.Model.RecipeBook.Recipe;
 import com.qwerty123.cookhelper.Controller.RecipeBookController;
-import com.qwerty123.cookhelper.Model.RecipeBook.RecipeBook;
-import com.qwerty123.cookhelper.Model.RecipeBookController;
 import com.qwerty123.cookhelper.Model.RecipeBookSaveController;
 import com.qwerty123.cookhelper.R;
 import com.qwerty123.cookhelper.Utils;
@@ -35,12 +33,6 @@ public class RecipeEditActivity extends AppCompatActivity implements View.OnClic
     EditText prepTime;
 
     PreparationStep[] steps;
-
-    // TODO  BIG TODO ===========================================================================
-    // TODO  Need to change this class and the layout to make use of a scroll view instead
-    // TODO  of a list view. Need to do dynamic creation of entries for steps, based on the value
-    // TODO  of the number picker.
-    // TODO  BIG TODO ===========================================================================
 
     protected void onCreate(Bundle savedInstanceState)
     {
