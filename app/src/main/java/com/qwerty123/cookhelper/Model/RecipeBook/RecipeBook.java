@@ -5,6 +5,11 @@ import android.content.Context;
 import com.qwerty123.cookhelper.Exceptions.DuplicateRecipeException;
 import com.qwerty123.cookhelper.Model.RecipeBookSaveController;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -12,6 +17,7 @@ import java.util.Random;
  */
 public class RecipeBook
 {
+    public Map<String,ArrayList> lookUpTable;
     public static int SAMPLE_LIST_SIZE = 20;
     public static final CulturalCategory[] sampleCategories = {
             new CulturalCategory("Canadian"),
@@ -188,6 +194,63 @@ public class RecipeBook
         else
         {
             return null;
+        }
+    }
+
+    private void createLookUpTable(){
+        lookUpTable = new HashMap<String, ArrayList>();
+        //List<Recipe> recipeList = new ArrayList<Recipe>();
+        List<String> MTKeyList = new ArrayList<String>();
+        List<String> CCKeyList = new ArrayList<String>();
+        List<String> IngredientKeyList = new ArrayList<String>();
+
+        for (Recipe recipe: recipes) {
+            MealType mealtype = recipe.getMealType();
+            if(!lookUpTable.containsKey(mealtype.toString())){
+                MTKeyList.add(mealtype.toString());
+            }
+            CulturalCategory culturalCat = recipe.getCulturalCategory();
+            if(!lookUpTable.containsKey(culturalCat.toString())){
+                CCKeyList.add(culturalCat.toString());
+            }
+
+            String[] ingredients = recipe.getIngredientsEnumeration().split(", ");
+            for (String ingredient: ingredients) {
+                if(!lookUpTable.containsKey(ingredient)){
+                    IngredientKeyList.add(ingredient);
+                }
+            }
+        }
+
+        for (String key: MTKeyList) {
+            List<Recipe> recipeList = new ArrayList<Recipe>();
+            for (Recipe recipe: recipes) {
+                if (key.equals(recipe.getMealType().toString())) {
+                    recipeList.add(recipe);
+                }
+                lookUpTable.put(key, (ArrayList) recipeList);
+            }
+        }
+
+        for (String key: CCKeyList) {
+            List<Recipe> recipeList = new ArrayList<Recipe>();
+            for (Recipe recipe: recipes) {
+                if (key.equals(recipe.getCulturalCategory().toString())) {
+                    recipeList.add(recipe);
+                }
+                lookUpTable.put(key, (ArrayList) recipeList);
+            }
+        }
+
+        for (String key: IngredientKeyList) {
+            List<Recipe> recipeList = new ArrayList<Recipe>();
+            for (Recipe recipe: recipes) {
+                String[] ingredients = recipe.getIngredientsEnumeration().split(", ");
+                if (Arrays.asList(ingredients).contains(key)) {
+                    recipeList.add(recipe);
+                }
+                lookUpTable.put(key, (ArrayList) recipeList);
+            }
         }
     }
 
