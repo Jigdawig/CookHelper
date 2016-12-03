@@ -1,5 +1,10 @@
 package com.qwerty123.cookhelper.Model.RecipeBook;
 
+import android.content.Context;
+
+import com.qwerty123.cookhelper.Exceptions.DuplicateRecipeException;
+import com.qwerty123.cookhelper.Model.RecipeBookSaveController;
+
 import java.util.Random;
 
 /**
@@ -130,26 +135,36 @@ public class RecipeBook
         return ingredients;
     }
 
-//    /**
-//     * Add a recipe to the recipe book. Ensures the recipe does not have the same name as another
-//     * recipe in the book.
-//     * @param newRecipe The recipe to be added.
-//     * @return If the recipe was added, return true. Otherwise, false.
-//     */
-//    public boolean addRecipe(Recipe newRecipe)
-//    {
-//        //Ensure there are no two recipes with the same name as recipe to be added.
-//        for(Recipe recipe : recipes)
-//        {
-//            if(recipe.name.equals(newRecipe.name))
-//            {
-//               return false;
-//            }
-//        }
-//
-//        recipes.add(newRecipe);
-//        return true;
-//    }
+    //NOTE: For the dave and delete
+    //NOTE: It might be better to have these methods
+    //NOTE: In RecipeBookController and have an update
+    //NOTE: method in RecipeBook that changes the
+    //NOTE: the Recipe[] array.
+    //NOTE: I don't really like that it calls RecipeBookSaveController
+
+
+    /**
+     * Add a recipe to the recipe book.
+     * @param newRecipe The recipe to be added.
+     * @throws DuplicateRecipeException
+     * If the recipe was added alters Recipe[] recipes to match
+     * new state, else the exception is thrown
+     */
+    public void addRecipe(Context context, Recipe newRecipe)
+        throws DuplicateRecipeException {
+    RecipeBookSaveController.saveNewRecipe(context, newRecipe);
+        recipes = RecipeBookSaveController.loadAllRecipes(context);
+    }
+
+    /**
+     * Removes a recipe from the recipe book.
+     * @param recipe The recipe to be deleted.
+     * Alters Recipe[] recipes to match new state
+     */
+    public void deleteRecipe(Context context, Recipe recipe){
+        RecipeBookSaveController.deleteRecipe(context, recipe);
+        recipes = RecipeBookSaveController.loadAllRecipes(context);
+    }
 
     public Recipe getRecipe(String recipeName)
     {

@@ -8,9 +8,12 @@ import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
+import com.qwerty123.cookhelper.Exceptions.DuplicateRecipeException;
 import com.qwerty123.cookhelper.Model.RecipeBook.PreparationStep;
 import com.qwerty123.cookhelper.Model.RecipeBook.Recipe;
+import com.qwerty123.cookhelper.Model.RecipeBook.RecipeBook;
 import com.qwerty123.cookhelper.Model.RecipeBookController;
+import com.qwerty123.cookhelper.Model.RecipeBookSaveController;
 import com.qwerty123.cookhelper.R;
 import com.qwerty123.cookhelper.View.StepEditListAdapter;
 
@@ -110,6 +113,20 @@ public class RecipeEditActivity extends AppCompatActivity implements NumberPicke
         Toast.makeText(getApplicationContext(), "Save Button Clicked", Toast.LENGTH_SHORT).show();
 
         //TODO Implement recipe saving
+
+        try{
+            //NOTE: I have never used Contexts before
+            //NOTE: Not entirely sure if 'this' is what I should be sending here
+            RecipeBookSaveController.saveChangedRecipe(this, recipe);
+        }
+        catch (DuplicateRecipeException e){
+            //TODO
+            //NOTE: I imagine here you would want a little toast
+            //NOTE: And then go back to the edit screen.
+            //NOTE: Maybe the exception should be thrown back to whatever called this
+            //NOTE: And perhaps this would be better off in RecipeBookController
+            System.err.print("There is an existing recipe with this name, or with these exact details.");
+        }
 
         finish();
     }

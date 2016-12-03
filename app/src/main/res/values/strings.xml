@@ -53,6 +53,9 @@
     <string name="add_step_button_text">Add Step</string>
     <string name="instruction_hint">Enter instruction</string>
 
+    <!-- Save recipe Resources -->
+    <string name="json_recipe_savefile">RecipeDB.json</string>
+
     <!-- temporary resources for debug or placeholding -->
 
     <string-array name="meal_types">

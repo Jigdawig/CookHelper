@@ -1,6 +1,12 @@
 package com.qwerty123.cookhelper.Model.RecipeBook;
 
-public class Recipe
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import JSONSerialization.JSONSerializable;
+
+public class Recipe implements JSONSerializable
 {
     private String name;
     private CulturalCategory culturalCategory;
@@ -20,6 +26,12 @@ public class Recipe
         this.preparationTime = preparationTime;
         this.ingredients = ingredients;
         this.preparationSteps = preparationSteps;
+    }
+
+    //Constructor initialize recipe from a json Object
+    public Recipe(JSONObject character)
+    {
+        initializeFromJSON(character);
     }
 
     public String getName()
@@ -84,5 +96,79 @@ public class Recipe
     public PreparationStep[] getPreparationSteps()
     {
         return preparationSteps;
+    }
+
+    @Override
+    //Stores the data into json files
+    public JSONObject toJSON() {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray ingredientArray = new JSONArray();
+        JSONArray prepArray = new JSONArray();
+
+        try
+        {
+            jsonObject.put("Name", name);
+            jsonObject.put("CulturalCategory", culturalCategory.toString());
+            jsonObject.put("MealType", mealType.toString());
+            jsonObject.put("PreparationTime", preparationTime);
+
+            for (Ingredient ingredient: ingredients) {
+                String ingredientName = ingredient.toString();
+                ingredientArray.put(ingredientName);
+            }
+            jsonObject.put("Ingredients", ingredientArray);
+
+            for (PreparationStep prepStep: preparationSteps) {
+                String instruction = prepStep.toString();
+                prepArray.put(instruction);
+            }
+            jsonObject.put("PreparationSteps", prepArray);
+        }
+        catch (JSONException e)
+        {
+            System.err.println("Error while converting Recipe details to JsonObject");
+            e.printStackTrace();
+            //jsonObject = null;
+        }
+
+        return jsonObject;
+    }
+
+    @Override
+    //This is so we can actually load data from the json files
+    public void initializeFromJSON(JSONObject jsonObject) {
+        if (jsonObject != null)
+        {
+            try
+            {
+                name = jsonObject.getString("Name");
+                culturalCategory = new CulturalCategory(jsonObject.getString("CulturalCategory"));
+                mealType = new MealType(jsonObject.getString("MealType"));
+                preparationTime = jsonObject.getInt("PreparationTime");
+
+                JSONArray ingredientArray = jsonObject.getJSONArray("Ingredients");
+                ingredients = new Ingredient[ingredientArray.length()];
+                for (int i = 0; i < ingredientArray.length(); i++) {
+                    ingredients[i] = new Ingredient((String)ingredientArray.get(i));
+                }
+
+                JSONArray prepSteps = jsonObject.getJSONArray("PreparationSteps");
+                preparationSteps = new PreparationStep[prepSteps.length()];
+                for (int i = 0; i < prepSteps.length(); i++) {
+                    preparationSteps[i] = new PreparationStep((String)prepSteps.get(i), ingredients);
+                }
+
+
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            throw new NullPointerException("JSON Object is null. Cannot Initialize");
+        }
+
     }
 }
