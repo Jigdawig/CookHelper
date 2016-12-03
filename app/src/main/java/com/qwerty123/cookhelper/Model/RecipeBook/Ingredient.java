@@ -1,8 +1,5 @@
 package com.qwerty123.cookhelper.Model.RecipeBook;
 
-/**
- * Created by David on 2016-11-26.
- */
 public class Ingredient
 {
     private String name;

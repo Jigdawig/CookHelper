@@ -29,15 +29,10 @@ public class RecipeDetailViewActivity extends AppCompatActivity
     private Recipe getRecipeReference()
     {
         int recipeIndex = getIntent().getIntExtra(getResources().getString(R.string.recipe_index_extra), -1);
-        String recipeName = getIntent().getStringExtra(getResources().getString(R.string.recipe_name_extra));
 
         if (recipeIndex > -1)
         {
             return RecipeBookController.getRecipe(recipeIndex);
-        }
-        else if (recipeName != null && !recipeName.isEmpty())
-        {
-            return RecipeBookController.getRecipe(recipeName);
         }
         else
         {

@@ -12,13 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-/**
- * Created by David on 2016-11-26.
- */
 public class RecipeBook
 {
     public Map<String,ArrayList> lookUpTable;
     public static int SAMPLE_LIST_SIZE = 20;
+
     public static final CulturalCategory[] sampleCategories = {
             new CulturalCategory("Canadian"),
             new CulturalCategory("Italian"),
@@ -27,6 +25,7 @@ public class RecipeBook
             new CulturalCategory("Chinese"),
             new CulturalCategory("German")
     };
+
     public static final MealType[] sampleTypes = {
             new MealType("Supper"),
             new MealType("Lunch"),
@@ -37,18 +36,18 @@ public class RecipeBook
     };
 
     public static final Ingredient[] sampleIngredients = {
-            new Ingredient("Potato"),
-            new Ingredient("Ground Beef"),
-            new Ingredient("Ground Pork"),
-            new Ingredient("Onion"),
-            new Ingredient("Rice"),
-            new Ingredient("Cabbage"),
-            new Ingredient("Tomato"),
-            new Ingredient("Celery"),
-            new Ingredient("Chicken breasts"),
-            new Ingredient("Apple"),
-            new Ingredient("Pineapple"),
-            new Ingredient("Sugar")
+            new Ingredient("potato"),
+            new Ingredient("ground_beef"),
+            new Ingredient("ground_pork"),
+            new Ingredient("onion"),
+            new Ingredient("rice"),
+            new Ingredient("cabbage"),
+            new Ingredient("tomato"),
+            new Ingredient("celery"),
+            new Ingredient("chicken_breasts"),
+            new Ingredient("apple"),
+            new Ingredient("pineapple"),
+            new Ingredient("sugar")
     };
 
     private Recipe[] recipes;
@@ -73,7 +72,7 @@ public class RecipeBook
             int prepTime = 15 + random.nextInt(30);
 
             Ingredient[] ingredients = createSampleIngredients(random);
-            PreparationStep[] steps = createSampleSteps(random, ingredients);
+            PreparationStep[] steps = createSampleSteps(recipeBook, ingredients);
 
             recipeBook.recipes[i] = new Recipe(name, category, type, prepTime, ingredients, steps);
         }
@@ -81,7 +80,7 @@ public class RecipeBook
         return recipeBook;
     }
 
-    private static PreparationStep[] createSampleSteps(Random random, Ingredient[] ingredients)
+    private static PreparationStep[] createSampleSteps(RecipeBook recipeBook, Ingredient[] ingredients)
     {
         int numPairs = ingredients.length/2;
         boolean addSingle = ingredients.length % 2 == 1;
@@ -98,14 +97,19 @@ public class RecipeBook
             stepIngredients[0] = ingredients[i];
             stepIngredients[1] = ingredients[i + 1];
 
-            steps[stepIndex] = new PreparationStep("Combine %1$s and %2$s", stepIngredients);
+            steps[stepIndex] = new PreparationStep(recipeBook,
+                    String.format("Combine %1$s and %2$s",
+                            "#" + stepIngredients[0],
+                            "#" + stepIngredients[1]));
+
             ++stepIndex;
         }
 
         if(addSingle)
         {
             Ingredient[] singleIngredient = {ingredients[ingredients.length-1]};
-            steps[steps.length-1] = new PreparationStep("Add %1$s", singleIngredient);
+            steps[steps.length-1] = new PreparationStep(recipeBook,
+                    String.format("Add %1$s", "#" + singleIngredient));
         }
 
         return steps;

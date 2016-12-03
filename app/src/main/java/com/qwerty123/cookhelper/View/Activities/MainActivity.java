@@ -139,5 +139,4 @@ public class MainActivity extends AppCompatActivity
     {
         getFragmentManager().beginTransaction().replace(R.id.content_frame, new RecipeBookFragment()).commit();
     }
-
 }

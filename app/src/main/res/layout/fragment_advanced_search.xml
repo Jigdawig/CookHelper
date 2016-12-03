@@ -19,11 +19,29 @@
             android:hint="@string/recipe_name_hint"/>
 
         <EditText
+            android:id="@+id/AS_category_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/category_hint"/>
+
+        <EditText
+            android:id="@+id/AS_meal_type_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/type_hint"/>
+
+        <EditText
             android:id="@+id/AS_preparation_time_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prep_time_hint"
-            android:inputType="number"/>
+            android:inputType="number"/><![CDATA[
+
+        >
+
+
+
+        ]]>
 
         <EditText
             android:id="@+id/AS_ingredients"
@@ -31,24 +49,13 @@
             android:layout_height="wrap_content"
             android:hint="@string/ingredient_hint"/>
 
-        <EditText
-            android:id="@+id/AS_meal_type_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/type_hint"/>>
-
-        <EditText
-            android:id="@+id/AS_category_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/category_hint"/>
-
         <Button
             android:id="@+id/AS_search_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/search_button_text"/>
+            android:text="@string/search_button_text"
+            android:nestedScrollingEnabled="false"/>
 
     </LinearLayout>
 

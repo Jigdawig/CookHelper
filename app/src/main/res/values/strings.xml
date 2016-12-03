@@ -20,6 +20,10 @@
     <string name="steps_title">Steps</string>
 
     <!-- Edit Recipe string resources-->
+    <string name="save_button_text">Save</string>
+    <string name="instruction_hint">Enter instruction</string>
+    <string name="add_step_button_text">+</string>
+    <string name="delete_button_text">-</string>
 
     <!-- Advanced Search string resources -->
     <string name="recipe_name_hint">Recipe name</string>
@@ -48,10 +52,6 @@
 
     <!-- Constant strings for intent extras -->
     <string name="recipe_index_extra">recipe_index</string>
-    <string name="recipe_name_extra">recipe_name</string>
-    <string name="save_button_text">Save</string>
-    <string name="add_step_button_text">Add Step</string>
-    <string name="instruction_hint">Enter instruction</string>
 
     <!-- Save recipe Resources -->
     <string name="json_recipe_savefile">RecipeDB.json</string>

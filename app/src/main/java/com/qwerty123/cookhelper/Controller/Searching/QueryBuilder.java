@@ -1,11 +1,9 @@
 package com.qwerty123.cookhelper.Controller.Searching;
 
 import android.support.annotation.NonNull;
-import android.support.v4.util.Pair;
 
 import com.qwerty123.cookhelper.Utils;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class QueryBuilder
@@ -17,9 +15,9 @@ public class QueryBuilder
     IngredientQueryGroup ingredientQueryGroup;
 
     //Constants for parsing
-    final char notToken = '-';
-    final char andToken = '&';
-    final char orToken = '+';
+    final char NOT_TOKEN = '-';
+    final char AND_TOKEN = '&';
+    final char OR_TOKEN = '+';
 
     public QueryBuilder(String name, String category, String type, int prepTime)
     {
@@ -83,7 +81,7 @@ public class QueryBuilder
 
                         if (operator == 0)
                         {
-                            operator = andToken;
+                            operator = AND_TOKEN;
                         }
                     }
 
@@ -108,13 +106,13 @@ public class QueryBuilder
                 {
                     switch (operator)
                     {
-                        case notToken:
+                        case NOT_TOKEN:
                             ingredientQueryGroup.addIngredientExclude(ingredientName);
                             break;
-                        case andToken:
+                        case AND_TOKEN:
                             ingredientQueryGroup.addIngredientRequired(ingredientName);
                             break;
-                        case orToken:
+                        case OR_TOKEN:
                             ingredientQueryGroup.addIngredientOptional(ingredientName);
                             break;
                     }
@@ -142,14 +140,14 @@ public class QueryBuilder
         char operator;
         switch (token.charAt(0))
         {
-            case notToken:
-                operator = notToken;
+            case NOT_TOKEN:
+                operator = NOT_TOKEN;
                 break;
-            case andToken:
-                operator = andToken;
+            case AND_TOKEN:
+                operator = AND_TOKEN;
                 break;
-            case orToken:
-                operator = orToken;
+            case OR_TOKEN:
+                operator = OR_TOKEN;
                 break;
             default:
                 operator = 0;
@@ -171,7 +169,7 @@ public class QueryBuilder
         {
             c = token.charAt(0);
 
-            return (c == notToken || c == andToken || c == orToken);
+            return (c == NOT_TOKEN || c == AND_TOKEN || c == OR_TOKEN);
         }
         else
         {

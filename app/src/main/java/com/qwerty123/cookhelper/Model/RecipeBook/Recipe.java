@@ -77,7 +77,7 @@ public class Recipe implements JSONSerializable
 
         for(int i = 0; i < preparationSteps.length; ++i)
         {
-            buffer.append(preparationSteps[i].toString());
+            buffer.append(preparationSteps[i].getDisplayString());
 
             if(i != preparationSteps.length - 1)
             {
