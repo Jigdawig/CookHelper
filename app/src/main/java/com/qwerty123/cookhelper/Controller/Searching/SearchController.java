@@ -11,7 +11,6 @@ import com.qwerty123.cookhelper.Model.RecipeBook.RecipeBook;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.PriorityQueue;
-import java.util.TreeMap;
 
 public class SearchController
 {
@@ -19,13 +18,20 @@ public class SearchController
 
     public static ArrayList<Recipe> performSearch(Query query)
     {
+        lastResult = search(query);
+        return lastResult;
+    }
+
+    private static ArrayList<Recipe> search(Query query)
+    {
         ArrayList<Recipe> results = new ArrayList<>();
 
         RecipeBook recipeBook = RecipeBook.getInstance();
 
         if (query.hasNameCriteria())
         {
-            results.add(recipeBook.getRecipe(query.getName()));
+            Recipe recipe = recipeBook.getRecipe(query.getName());
+            results.add(recipe);
             return results;
         }
 
@@ -122,10 +128,11 @@ public class SearchController
 
             // At this point, we have grabbed all recipes with required ingredients and excluded as necessary.
             // Now we sort according to relevance, placing those with additional ingredients higher.
-            PriorityQueue<Pair<Integer, Recipe>> recipeQueue = new PriorityQueue<>();
 
             if (query.hasOptionalIngredients())
             {
+                PriorityQueue<PriorityRecipePair> recipeQueue = new PriorityQueue<>();
+
                 ArrayList<String> ingredientNames = query.getExcludedIngredients();
 
                 ArrayList<Ingredient> optionalIngredients = new ArrayList<>();
@@ -150,17 +157,26 @@ public class SearchController
                         }
                     }
 
-                    recipeQueue.add(new Pair<Integer, Recipe>(priority, recipe));
+                    recipeQueue.add(new PriorityRecipePair(priority, recipe));
                 }
-            }
 
-            while(!recipeQueue.isEmpty())
-            {
-                results.add(0, recipeQueue.remove().second);
+                while(!recipeQueue.isEmpty())
+                {
+                    results.add(0, recipeQueue.remove().second);
+                }
+
+                return results;
             }
         }
 
-        lastResult = results;
+        if(!partialResults.isEmpty())
+        {
+            for(Recipe recipe : partialResults)
+            {
+                results.add(recipe);
+            }
+        }
+
         return results;
     }
 

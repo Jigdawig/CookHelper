@@ -28,6 +28,17 @@ public class RecipeDetailViewActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        if(recipe != null)
+        {
+            updateDisplay();
+        }
+    }
+
     private Recipe getRecipeReference()
     {
         recipeIndex = getIntent().getIntExtra(getResources().getString(R.string.recipe_index_extra), -1);

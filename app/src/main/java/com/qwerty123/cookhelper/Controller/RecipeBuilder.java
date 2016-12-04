@@ -6,6 +6,7 @@ import com.qwerty123.cookhelper.Model.RecipeBook.MealType;
 import com.qwerty123.cookhelper.Model.RecipeBook.PreparationStep;
 import com.qwerty123.cookhelper.Model.RecipeBook.Recipe;
 import com.qwerty123.cookhelper.Model.RecipeBook.RecipeBook;
+import com.qwerty123.cookhelper.Utils.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,7 +63,7 @@ public class RecipeBuilder
                 }
 
                 displayString.append(" ");
-                displayString.append(token);
+                displayString.append(Utils.createDisplayName(token));
             }
         }
 

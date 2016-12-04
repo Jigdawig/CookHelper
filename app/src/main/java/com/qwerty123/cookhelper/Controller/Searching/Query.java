@@ -49,7 +49,7 @@ public class Query
 
     public boolean hasIngredientCriteria()
     {
-        return !ingredients.isEmpty();
+        return ingredients != null && !ingredients.isEmpty();
     }
 
     public boolean hasRequiredIngredients()

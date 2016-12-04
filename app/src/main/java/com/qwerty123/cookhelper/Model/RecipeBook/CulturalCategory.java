@@ -10,7 +10,7 @@ public class CulturalCategory extends RecipeTable
 
     public CulturalCategory(String name)
     {
-        if(name.length() == 0)
+        if (name.length() == 0)
         {
             throw new IllegalArgumentException("Empty string passed as category name.");
         }

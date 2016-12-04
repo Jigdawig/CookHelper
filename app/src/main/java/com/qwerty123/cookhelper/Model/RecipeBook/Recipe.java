@@ -74,19 +74,19 @@ public class Recipe implements JSONSerializable
 
     public String getPreparationStepEnumeration()
     {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
 
         for (int i = 0; i < preparationSteps.length; ++i)
         {
-            buffer.append(preparationSteps[i].getDisplayString());
+            builder.append(preparationSteps[i].getDisplayString());
 
             if (i != preparationSteps.length - 1)
             {
-                buffer.append("\n");
+                builder.append("\n");
             }
         }
 
-        return buffer.toString();
+        return builder.toString();
     }
 
     public int getNumberSteps()

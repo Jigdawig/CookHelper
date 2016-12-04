@@ -53,6 +53,23 @@ public class RecipeBook
         }
     }
 
+    public Recipe getRecipe(String name)
+    {
+        for (int i = 0; i < recipes.size(); i++)
+        {
+            Recipe recipe = recipes.get(i);
+            String recipeName = recipe.getName();
+            boolean nameEquals = recipeName.equals(name);
+
+            if(nameEquals)
+            {
+                return recipe;
+            }
+        }
+
+        return null;
+    }
+
     public CulturalCategory getCategory(String categoryName)
     {
         categoryName = categoryName.toLowerCase();
@@ -74,10 +91,9 @@ public class RecipeBook
     public MealType getMealType(String typeName)
     {
         typeName = typeName.toLowerCase();
-
         MealType type;
 
-        if(categories.containsKey(typeName))
+        if(types.containsKey(typeName))
         {
             type = types.get(typeName);
         }
@@ -95,7 +111,7 @@ public class RecipeBook
         ingredientName = ingredientName.toLowerCase();
         Ingredient ingredient;
 
-        if(categories.containsKey(ingredientName))
+        if(ingredients.containsKey(ingredientName))
         {
             ingredient = ingredients.get(ingredientName);
         }
@@ -150,19 +166,6 @@ public class RecipeBook
     public void setRecipeList(Recipe[] recipeArray)
     {
         this.recipes =new ArrayList<Recipe>(Arrays.asList(recipeArray));
-    }
-
-    public Recipe getRecipe(String name)
-    {
-        for(Recipe recipe: recipes)
-        {
-            if(recipe.getName().equals(name))
-            {
-                return recipe;
-            }
-        }
-
-        return null;
     }
 
     public boolean hasCategory(String category)

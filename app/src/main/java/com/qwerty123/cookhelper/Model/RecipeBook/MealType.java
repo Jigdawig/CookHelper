@@ -10,7 +10,7 @@ public class MealType extends RecipeTable
 
     public MealType(String name)
     {
-        if(name.length() == 0)
+        if (name.length() == 0)
         {
             throw new IllegalArgumentException("Empty string passed as type name.");
         }

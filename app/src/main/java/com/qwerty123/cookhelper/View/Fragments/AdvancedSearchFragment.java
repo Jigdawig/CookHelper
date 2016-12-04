@@ -64,7 +64,7 @@ public class AdvancedSearchFragment extends Fragment implements View.OnClickList
 
         String ingredientsCriteria = ingredients.getText().toString();
 
-        if (!nameCriteria.isEmpty() || !categoryCriteria.isEmpty() || !categoryCriteria.isEmpty() || prepTimeCriteria > 0 || !ingredientsCriteria.isEmpty())
+        if (!nameCriteria.isEmpty() || !categoryCriteria.isEmpty() || !typeCriteria.isEmpty() || prepTimeCriteria > 0 || !ingredientsCriteria.isEmpty())
         {
             QueryBuilder queryBuilder = new QueryBuilder(nameCriteria, categoryCriteria, typeCriteria, prepTimeCriteria);
             Query query = null;
@@ -86,6 +86,10 @@ public class AdvancedSearchFragment extends Fragment implements View.OnClickList
                 {
                     Intent intent = new Intent(getView().getContext(), SearchResultActivity.class);
                     startActivity(intent);
+                }
+                else
+                {
+                    promptUserForValidInput("No recipes matched criteria.");
                 }
             }
         }

@@ -38,17 +38,17 @@
     <string name="help_introduction">Welcome to CookHelper, your best friend for managing your favorite recipes. CookHelper allows you to create, edit and store recipes and all their important details.</string>
     <string name="help_recipe_book">Recipe Book</string>
     <string name="help_recipe_book_header">Recipe Book</string>
-    <string name="help_recipe_book_description">From the navigation drawer, you can access your Recipe Book. It is where you\'ll be able to add, edit, delete and view your recipes. Your collection of recipes will be displayed as a list.</string>
+    <string name="help_recipe_book_description">From the navigation drawer, you can access your Recipe Book where it will store your collection of recipes in a list. From here, you\'ll be able to add, edit, delete and view your recipes.</string>
     <string name="help_add_recipe_header">How Do I Add A Recipe?</string>
-    <string name="help_add_recipe_description">In Recipe Book, click the floating action button with the + sign. Next, you\'ll be able to enter the recipe name, the ingredients, a meal type, a cultural category, a maximum preparation time and a set of instructions.</string>
+    <string name="help_add_recipe_description">A floating action button with the + sign in the bottom right-hand corner is available from any menu item chosen from the navigation drawer. \n\nYou\'ll be able to enter the recipe name, a maximum preparation time, a cultural category, and a meal type. \n\nTo add ingredients, prefix each ingredient name with the special symbol # when writing the steps for your recipe. eg. Add #milk and #butter \n\nTo add or remove a step, press the + or - button respectively.</string>
     <string name="help_view_recipe_header">How Do I View A Recipe?</string>
-    <string name="help_view_recipe_description">In Recipe Book, click on the recipe from the list of recipes.</string>
+    <string name="help_view_recipe_description">In Recipe Book, tap the recipe from the list of recipes and you\'ll be able to view the recipe and its content.</string>
     <string name="help_edit_recipe_header">How Do I Edit A Recipe?</string>
-    <string name="help_edit_recipe_description">In Recipe Book, select the recipe and then click the Edit button.</string>
+    <string name="help_edit_recipe_description">In Recipe Book you can, \n\n1) Select a recipe and click the Edit button. \n\n2) Tap and hold on the chosen recipe and a dialog will appear with an option to edit.</string>
     <string name="help_delete_recipe_header">How Do I Delete A Recipe?</string>
-    <string name="help_delete_recipe_description">In Recipe Book, press down on the selected recipe in which a dialog will appear requesting confirmation to delete.</string>
+    <string name="help_delete_recipe_description">In Recipe Book, tap and hold on the chosen recipe and a dialog will appear with an option to delete.</string>
     <string name="help_search_recipe_header">How Do I Search For A Recipe?</string>
-    <string name="help_search_recipe_description">From the navigation drawer, you can access Advanced Search.\n\nThe following search fields are: recipe name, ingredients, meal type, cultural category and maximum preparation time. Specify at least one or all of these fields and click Search.\n\nAny results that match the query will display a list of recipes, otherwise it will indicate that no recipes have been found.</string>
+    <string name="help_search_recipe_description">From the navigation drawer, you can access Advanced Search.\n\nThe following search fields are: recipe name, cultural category, meal type, maximum preparation time, and ingredients. Specify at least one or more of these fields and click Search. \n\nWhen searching by ingredients, the options to include and exclude ingredients can be achieved by using the special symbols: &amp; (AND), - (NOT) and + (OR). eg. Tomato &amp; Cheese \n\nAny results that match the query will display a list of recipes, otherwise it will indicate that no recipes have been found.\n\n</string>
 
     <!-- Constant strings for intent extras -->
     <string name="recipe_index_extra">recipe_index</string>
