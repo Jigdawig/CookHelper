@@ -1,9 +1,7 @@
 package com.qwerty123.cookhelper.Controller.Searching;
 
-import com.qwerty123.cookhelper.Model.RecipeBook.Ingredient;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Query
 {
@@ -96,21 +94,6 @@ public class Query
     {
         return prepTime;
     }
-
-//    public boolean isRequired(String name)
-//    {
-//        return ingredients.isRequired(name);
-//    }
-//
-//    public boolean isOptional(String name)
-//    {
-//        return ingredients.isOptional(name);
-//    }
-//
-//    public boolean isExcluded(String name)
-//    {
-//        return ingredients.isExcluded(name);
-//    }
 }
 
 

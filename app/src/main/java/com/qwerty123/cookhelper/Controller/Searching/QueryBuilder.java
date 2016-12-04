@@ -33,7 +33,6 @@ public class QueryBuilder
         return new Query(nameCriteria, categoryCriteria, typeCriteria, prepTimeCriteria, ingredientQueryGroup);
     }
 
-
     public boolean parseIngredientCriteria(String ingredientCriteria)
     {
         if(ingredientCriteria != null && !ingredientCriteria.isEmpty())
@@ -70,7 +69,7 @@ public class QueryBuilder
 
                     if (parseWord)
                     {
-                        if (token.length() > 1 && Utils.isAlpha(token))
+                        if (token.length() > 1 && Utils.isAlphaOrUnderscore(token))
                         {
                             ingredientName = token;
                         }
@@ -85,12 +84,12 @@ public class QueryBuilder
                         }
                     }
 
-                    if (operator != 0 && (token == null || token.isEmpty()))
+                    if (operator != 0 && token.isEmpty())
                     {
                         if (scanner.hasNext())
                         {
                             String ingredient = scanner.next();
-                            if (Utils.isAlpha(ingredient))
+                            if (Utils.isAlphaOrUnderscore(ingredient))
                             {
                                 ingredientName = ingredient;
                             }

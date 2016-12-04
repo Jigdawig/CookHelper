@@ -16,9 +16,9 @@ public class Utils
         return applicationContext;
     }
 
-    public static boolean isAlpha(String string)
+    public static boolean isAlphaOrUnderscore(String string)
     {
-        return string.matches("[a-zA-Z]+");
+        return string.matches("[a-zA-Z_]+");
     }
 
     public static boolean isNum(String string)

@@ -133,7 +133,7 @@ public class SearchController
             {
                 PriorityQueue<PriorityRecipePair> recipeQueue = new PriorityQueue<>();
 
-                ArrayList<String> ingredientNames = query.getExcludedIngredients();
+                ArrayList<String> ingredientNames = query.getOptionalIngredients();
 
                 ArrayList<Ingredient> optionalIngredients = new ArrayList<>();
 
@@ -149,9 +149,11 @@ public class SearchController
                 {
                     int priority = 0;
 
-                    for (Ingredient ingredient : optionalIngredients)
+                    Ingredient[] ingredients = recipe.getIngredients();
+
+                    for (Ingredient ingredient : ingredients)
                     {
-                        if (ingredient.recipes.contains(recipe))
+                        if (optionalIngredients.contains(ingredient))
                         {
                             ++priority;
                         }
