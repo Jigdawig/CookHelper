@@ -1,5 +1,10 @@
 package com.qwerty123.cookhelper.Controller.Searching;
 
+import com.qwerty123.cookhelper.Model.RecipeBook.Ingredient;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Query
 {
     private String name;
@@ -47,13 +52,42 @@ public class Query
         return !ingredients.isEmpty();
     }
 
+    public boolean hasRequiredIngredients()
+    {
+        return !ingredients.required.isEmpty();
+    }
 
-    public String getCategory()
+    public ArrayList<String> getRequiredIngredients()
+    {
+        return ingredients.required;
+    }
+
+    public boolean hasOptionalIngredients()
+    {
+        return !ingredients.optional.isEmpty();
+    }
+
+    public ArrayList<String> getOptionalIngredients()
+    {
+        return ingredients.optional;
+    }
+
+    public boolean hasExcludedIngredients()
+    {
+        return !ingredients.exclude.isEmpty();
+    }
+
+    public ArrayList<String> getExcludedIngredients()
+    {
+        return ingredients.exclude;
+    }
+
+    public String getCategoryName()
     {
         return category;
     }
 
-    public String getType()
+    public String getTypeName()
     {
         return type;
     }
@@ -63,20 +97,20 @@ public class Query
         return prepTime;
     }
 
-    public boolean isRequired(String name)
-    {
-        return ingredients.isRequired(name);
-    }
-
-    public boolean isOptional(String name)
-    {
-        return ingredients.isOptional(name);
-    }
-
-    public boolean isExcluded(String name)
-    {
-        return ingredients.isExcluded(name);
-    }
+//    public boolean isRequired(String name)
+//    {
+//        return ingredients.isRequired(name);
+//    }
+//
+//    public boolean isOptional(String name)
+//    {
+//        return ingredients.isOptional(name);
+//    }
+//
+//    public boolean isExcluded(String name)
+//    {
+//        return ingredients.isExcluded(name);
+//    }
 }
 
 

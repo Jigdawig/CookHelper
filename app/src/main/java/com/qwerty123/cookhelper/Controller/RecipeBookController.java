@@ -1,6 +1,5 @@
 package com.qwerty123.cookhelper.Controller;
 
-import com.qwerty123.cookhelper.Exceptions.DuplicateRecipeException;
 import com.qwerty123.cookhelper.Model.RecipeBook.Recipe;
 import com.qwerty123.cookhelper.Model.RecipeBook.RecipeBook;
 
@@ -45,13 +44,8 @@ public class RecipeBookController
         RecipeBookSaveController.saveRecipes(recipeBook);
     }
 
-
-
-    // Sample recipe book code ===============================================================
-//    private static RecipeBook sampleRecipeBook = RecipeBook.createSampleRecipeBook();
-
-//    public static Recipe[] getRecipesFromSampleRecipeBook()
-//    {
-//        return sampleRecipeBook.getRecipeArray();
-//    }
+    public static int getRecipeIndex(String recipeName)
+    {
+        return recipeBook.getRecipeIndex(recipeName);
+    }
 }

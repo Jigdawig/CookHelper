@@ -1,5 +1,6 @@
 package com.qwerty123.cookhelper.View.Fragments;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 
 import android.app.Fragment;
@@ -14,8 +15,12 @@ import android.widget.Toast;
 import com.qwerty123.cookhelper.Controller.Searching.Query;
 import com.qwerty123.cookhelper.Controller.Searching.QueryBuilder;
 import com.qwerty123.cookhelper.Controller.Searching.SearchController;
+import com.qwerty123.cookhelper.Model.RecipeBook.Recipe;
 import com.qwerty123.cookhelper.R;
 import com.qwerty123.cookhelper.Utils.Utils;
+import com.qwerty123.cookhelper.View.Activities.SearchResultActivity;
+
+import java.util.ArrayList;
 
 public class AdvancedSearchFragment extends Fragment implements View.OnClickListener
 {
@@ -75,7 +80,13 @@ public class AdvancedSearchFragment extends Fragment implements View.OnClickList
 
             if (query != null)
             {
-                SearchController.performSearch(query);
+                ArrayList<Recipe> results = SearchController.performSearch(query);
+
+                if(!results.isEmpty())
+                {
+                    Intent intent = new Intent(getView().getContext(), SearchResultActivity.class);
+                    startActivity(intent);
+                }
             }
         }
         else

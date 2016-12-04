@@ -5,9 +5,9 @@ import java.util.List;
 
 public class IngredientQueryGroup
 {
-    List<String> required;
-    List<String> optional;
-    List<String> exclude;
+    ArrayList<String> required;
+    ArrayList<String> optional;
+    ArrayList<String> exclude;
 
     public IngredientQueryGroup()
     {
@@ -31,20 +31,20 @@ public class IngredientQueryGroup
         exclude.add(ingredientName);
     }
 
-    public boolean isRequired(String name)
-    {
-        return required.contains(name);
-    }
-
-    public boolean isOptional(String name)
-    {
-        return optional.contains(name);
-    }
-
-    public boolean isExcluded(String name)
-    {
-        return exclude.contains(name);
-    }
+//    public boolean isRequired(String name)
+//    {
+//        return required.contains(name);
+//    }
+//
+//    public boolean isOptional(String name)
+//    {
+//        return optional.contains(name);
+//    }
+//
+//    public boolean isExcluded(String name)
+//    {
+//        return exclude.contains(name);
+//    }
 
     public boolean isEmpty()
     {

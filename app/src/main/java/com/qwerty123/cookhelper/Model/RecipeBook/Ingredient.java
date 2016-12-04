@@ -1,8 +1,12 @@
 package com.qwerty123.cookhelper.Model.RecipeBook;
 
-public class Ingredient
+import com.qwerty123.cookhelper.Model.RecipeTable;
+import com.qwerty123.cookhelper.Utils.Utils;
+
+public class Ingredient extends RecipeTable
 {
     private String name;
+    private String displayName;
 
     public Ingredient(String name)
     {
@@ -12,6 +16,7 @@ public class Ingredient
         }
 
         this.name = name;
+        displayName = Utils.createDisplayName(name);
     }
 
     public String getName()
@@ -24,4 +29,11 @@ public class Ingredient
     {
         return name;
     }
+
+    public String getDisplayName()
+    {
+        return displayName;
+    }
+
+
 }

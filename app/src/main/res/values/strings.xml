@@ -52,6 +52,7 @@
 
     <!-- Constant strings for intent extras -->
     <string name="recipe_index_extra">recipe_index</string>
+    <string name="recipe_name_extra">recipe_name</string>
 
     <!-- Save recipe Resources -->
     <string name="recipe_book_filename">recipes.json</string>

@@ -32,8 +32,8 @@ public class RecipeListAdapter extends ArrayAdapter<Recipe>
         if (recipe != null)
         {
             nameTextView.setText(String.format("%1$s", recipe.getName()));
-            categoryTextView.setText(String.format("Culture: %1$s", recipe.getCulturalCategory().toString()));
-            typeTextView.setText(String.format("Meal: %1$s", recipe.getMealType().toString()));
+            categoryTextView.setText(String.format("Culture: %1$s", recipe.getCulturalCategory().getDisplayName()));
+            typeTextView.setText(String.format("Meal: %1$s", recipe.getMealType().getDisplayName()));
         }
         else
         {

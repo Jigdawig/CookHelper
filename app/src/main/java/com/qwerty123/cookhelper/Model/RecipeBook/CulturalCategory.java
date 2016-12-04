@@ -1,11 +1,12 @@
 package com.qwerty123.cookhelper.Model.RecipeBook;
 
-/**
- * Created by David on 2016-11-26.
- */
-public class CulturalCategory
+import com.qwerty123.cookhelper.Model.RecipeTable;
+import com.qwerty123.cookhelper.Utils.Utils;
+
+public class CulturalCategory extends RecipeTable
 {
     private String name;
+    private String displayName;
 
     public CulturalCategory(String name)
     {
@@ -15,11 +16,17 @@ public class CulturalCategory
         }
 
         this.name = name;
+        displayName = Utils.createDisplayName(name);
     }
 
     @Override
     public String toString()
     {
         return name;
+    }
+
+    public String getDisplayName()
+    {
+        return displayName;
     }
 }

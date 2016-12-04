@@ -25,4 +25,24 @@ public class Utils
     {
         return string.matches("[0-9]+");
     }
+
+
+    public static String createDisplayName(String name)
+    {
+       StringBuilder builder = new StringBuilder();
+
+            for(int i = 0; i < name.length(); ++i)
+            {
+                if(name.charAt(i) == '_')
+                {
+                    builder.append(' ');
+                }
+                else
+                {
+                    builder.append(name.charAt(i));
+                }
+            }
+
+            return builder.toString();
+    }
 }

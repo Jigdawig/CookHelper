@@ -38,7 +38,17 @@ public class RecipeDetailViewActivity extends AppCompatActivity
         }
         else
         {
-            return null;
+            String recipeName = getIntent().getStringExtra(getResources().getString(R.string.recipe_name_extra));
+            recipeIndex = RecipeBookController.getRecipeIndex(recipeName);
+
+            if(recipeIndex > -1)
+            {
+                return RecipeBookController.getRecipe(recipeIndex);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 
@@ -54,8 +64,8 @@ public class RecipeDetailViewActivity extends AppCompatActivity
             TextView steps = (TextView) findViewById(R.id.RDV_steps_enumeration);
 
             name.setText(recipe.getName());
-            category.setText(recipe.getCulturalCategory().toString());
-            type.setText(recipe.getMealType().toString());
+            category.setText(recipe.getCulturalCategory().getDisplayName());
+            type.setText(recipe.getMealType().getDisplayName());
             prepTime.setText(String.format("%1$s minutes", Integer.toString(recipe.getPreparationTime())));
             ingredients.setText(recipe.getIngredientsEnumeration());
             steps.setText(recipe.getPreparationStepEnumeration());
