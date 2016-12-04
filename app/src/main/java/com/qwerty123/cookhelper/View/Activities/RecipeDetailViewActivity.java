@@ -1,5 +1,6 @@
 package com.qwerty123.cookhelper.View.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.qwerty123.cookhelper.R;
 public class RecipeDetailViewActivity extends AppCompatActivity
 {
     Recipe recipe;
+    int recipeIndex;
 
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -28,7 +30,7 @@ public class RecipeDetailViewActivity extends AppCompatActivity
 
     private Recipe getRecipeReference()
     {
-        int recipeIndex = getIntent().getIntExtra(getResources().getString(R.string.recipe_index_extra), -1);
+        recipeIndex = getIntent().getIntExtra(getResources().getString(R.string.recipe_index_extra), -1);
 
         if (recipeIndex > -1)
         {
@@ -62,7 +64,8 @@ public class RecipeDetailViewActivity extends AppCompatActivity
 
     public void onClickEditButton(View view)
     {
-//        Intent intent = new Intent(getApplicationContext(), RecipeEditActivity.class);
-//        startActivityForResult(intent, 0);
+        Intent intent = new Intent(getApplicationContext(), RecipeEditActivity.class);
+        intent.putExtra(getString(R.string.recipe_index_extra), recipeIndex);
+        startActivity(intent);
     }
 }

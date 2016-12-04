@@ -10,13 +10,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.qwerty123.cookhelper.Exceptions.DuplicateRecipeException;
 import com.qwerty123.cookhelper.Model.RecipeBook.PreparationStep;
 import com.qwerty123.cookhelper.Model.RecipeBook.Recipe;
 import com.qwerty123.cookhelper.Controller.RecipeBookController;
-import com.qwerty123.cookhelper.Model.RecipeBookSaveController;
 import com.qwerty123.cookhelper.R;
-import com.qwerty123.cookhelper.Utils;
+import com.qwerty123.cookhelper.Utils.Utils;
 
 public class RecipeEditActivity extends AppCompatActivity implements View.OnClickListener
 {
@@ -142,36 +140,6 @@ public class RecipeEditActivity extends AppCompatActivity implements View.OnClic
 
     public void onSaveButton(View view)
     {
-        Toast.makeText(getApplicationContext(), "Save Button Clicked", Toast.LENGTH_SHORT).show();
-
-        if(recipe != null)
-        {
-            overwriteRecipe();
-        }
-        else
-        {
-            addNewRecipe();
-        }
-
-        try{
-            //NOTE: I have never used Contexts before
-            //NOTE: Not entirely sure if 'this' is what I should be sending here
-            RecipeBookSaveController.saveChangedRecipe(this, recipe);
-        }
-        catch (DuplicateRecipeException e){
-            //TODO
-            //NOTE: I imagine here you would want a little toast
-            //NOTE: And then go back to the edit screen.
-            //NOTE: Maybe the exception should be thrown back to whatever called this
-            //NOTE: And perhaps this would be better off in RecipeBookController
-            System.err.print("There is an existing recipe with this name, or with these exact details.");
-        }
-
-        finish();
-    }
-
-    private void addNewRecipe()
-    {
         String recipeName = name.getText().toString();
         String recipeCategory = category.getText().toString();
         String recipeType = type.getText().toString();
@@ -180,7 +148,18 @@ public class RecipeEditActivity extends AppCompatActivity implements View.OnClic
 
         String[] recipeSteps = obtainSteps();
 
-        RecipeBookController.addNewRecipe(recipeIndex, recipeName, recipeCategory, recipeType, recipePrepTime, recipeSteps);
+        if(recipe != null)
+        {
+            Toast.makeText(getApplicationContext(), recipe.getName() + " overridden", Toast.LENGTH_SHORT).show();
+            RecipeBookController.overwriteRecipe(recipeIndex, recipeName, recipeCategory,recipeType, recipePrepTime, recipeSteps);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "New recipe saved", Toast.LENGTH_SHORT).show();
+            RecipeBookController.addNewRecipe(recipeName, recipeCategory, recipeType, recipePrepTime, recipeSteps);
+        }
+
+        finish();
     }
 
     private int obtainPrepTime()
@@ -211,19 +190,6 @@ public class RecipeEditActivity extends AppCompatActivity implements View.OnClic
         }
 
         return recipeSteps;
-    }
-
-    private void overwriteRecipe()
-    {
-        String recipeName = name.getText().toString();
-        String recipeCategory = category.getText().toString();
-        String recipeType = type.getText().toString();
-
-        int recipePrepTime = obtainPrepTime();
-
-        String[] recipeSteps = obtainSteps();
-
-        RecipeBookController.overwriteRecipe(recipeIndex, recipeName, recipeCategory,recipeType, recipePrepTime, recipeSteps);
     }
 }
 

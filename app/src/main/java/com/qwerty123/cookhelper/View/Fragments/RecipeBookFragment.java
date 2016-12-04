@@ -14,8 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.qwerty123.cookhelper.Model.RecipeBook.RecipeBook;
 import com.qwerty123.cookhelper.View.Activities.RecipeDetailViewActivity;
-import com.qwerty123.cookhelper.Model.RecipeBook.Recipe;
 import com.qwerty123.cookhelper.Controller.RecipeBookController;
 import com.qwerty123.cookhelper.View.Activities.RecipeEditActivity;
 import com.qwerty123.cookhelper.View.RecipeListAdapter;
@@ -23,9 +23,31 @@ import com.qwerty123.cookhelper.R;
 
 public class RecipeBookFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener
 {
+    RecipeBook recipeBook;
+    ListView recipeBookListView;
+    RecipeListAdapter adapter;
+
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        recipeBook = RecipeBookController.getRecipeBook();
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        refreshListView();
+    }
+
+    private void refreshListView()
+    {
+        adapter = new RecipeListAdapter(recipeBookListView.getContext(), R.id.recipe_list_item_view, recipeBook.getRecipeArray());
+        recipeBookListView.setAdapter(adapter);
+        recipeBookListView.setOnItemClickListener(this);
+        adapter.notifyDataSetChanged();
     }
 
     @Nullable
@@ -33,19 +55,12 @@ public class RecipeBookFragment extends Fragment implements AdapterView.OnItemCl
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View recipeBookView = inflater.inflate(R.layout.fragment_recipe_book, container, false);
-        Context context = recipeBookView.getContext();
-
-        Recipe[] recipes = RecipeBookController.getRecipesFromSampleRecipeBook();
 
         if (recipeBookView instanceof ListView)
         {
-            ListView recipeBookListView = (ListView) recipeBookView;
+            recipeBookListView = (ListView) recipeBookView;
             recipeBookListView.setOnItemLongClickListener(this);
 
-            RecipeListAdapter adapter = new RecipeListAdapter(context, R.id.recipe_list_item_view, recipes);
-            recipeBookListView.setAdapter(adapter);
-            recipeBookListView.setOnItemClickListener(this);
-            adapter.notifyDataSetChanged();
         }
 
         return recipeBookView;
@@ -65,17 +80,21 @@ public class RecipeBookFragment extends Fragment implements AdapterView.OnItemCl
         AlertDialog.Builder dialogueBuilder = new AlertDialog.Builder(getActivity());
         dialogueBuilder.setMessage("Edit or delete recipe?");
 
-        dialogueBuilder.setPositiveButton("delete", new DialogInterface.OnClickListener() {
+        dialogueBuilder.setPositiveButton("delete", new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int id) {
+            public void onClick(DialogInterface dialog, int id)
+            {
                 deleteRecipeAtPosition(position);
-                Toast.makeText(getView().getContext(), "Recipe Deleted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getView().getContext(), "Recipe Deleted", Toast.LENGTH_SHORT).show();
             }
         });
 
-        dialogueBuilder.setNeutralButton("edit", new DialogInterface.OnClickListener(){
+        dialogueBuilder.setNeutralButton("edit", new DialogInterface.OnClickListener()
+        {
             @Override
-            public void onClick(DialogInterface dialog, int id) {
+            public void onClick(DialogInterface dialog, int id)
+            {
                 editRecipeAtPosition(position);
             }
         });
@@ -90,6 +109,7 @@ public class RecipeBookFragment extends Fragment implements AdapterView.OnItemCl
     private void deleteRecipeAtPosition(int position)
     {
         RecipeBookController.deleteRecipe(position);
+        refreshListView();
     }
 
     private void editRecipeAtPosition(int position)

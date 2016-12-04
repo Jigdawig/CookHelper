@@ -1,4 +1,4 @@
-package JSONSerialization;
+package com.qwerty123.cookhelper.Utils.JSONSerialization;
 
 import android.content.Context;
 

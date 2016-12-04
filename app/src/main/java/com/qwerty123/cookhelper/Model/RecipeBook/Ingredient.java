@@ -6,12 +6,17 @@ public class Ingredient
 
     public Ingredient(String name)
     {
-        if(name.length() == 0)
+        if (name.length() == 0)
         {
             throw new IllegalArgumentException("Empty string passed as ingredient name.");
         }
 
         this.name = name;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 
     @Override

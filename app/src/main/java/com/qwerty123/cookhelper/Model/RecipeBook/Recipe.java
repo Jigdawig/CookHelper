@@ -4,10 +4,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import JSONSerialization.JSONSerializable;
+import com.qwerty123.cookhelper.Controller.RecipeBuilder;
+import com.qwerty123.cookhelper.Utils.JSONSerialization.JSONSerializable;
+
+import java.util.ArrayList;
 
 public class Recipe implements JSONSerializable
 {
+    private RecipeBook recipeBook;
     private String name;
     private CulturalCategory culturalCategory;
     private MealType mealType;
@@ -17,20 +21,17 @@ public class Recipe implements JSONSerializable
     private PreparationStep[] preparationSteps;
 
 
-    public Recipe(String name, CulturalCategory culturalCategory, MealType mealType, int preparationTime,
+    public Recipe(RecipeBook recipeBook, String name, CulturalCategory culturalCategory, MealType mealType, int preparationTime,
                   Ingredient[] ingredients, PreparationStep[] preparationSteps)
     {
-        this.name = name;
-        this.culturalCategory = culturalCategory;
-        this.mealType = mealType;
-        this.preparationTime = preparationTime;
-        this.ingredients = ingredients;
-        this.preparationSteps = preparationSteps;
+        this.recipeBook = recipeBook;
+        setInfo(name, culturalCategory, mealType, preparationTime, ingredients, preparationSteps);
     }
 
     //Constructor initialize recipe from a json Object
-    public Recipe(JSONObject recipe)
+    public Recipe(RecipeBook recipeBook, JSONObject recipe)
     {
+        this.recipeBook = recipeBook;
         initializeFromJSON(recipe);
     }
 
@@ -58,11 +59,11 @@ public class Recipe implements JSONSerializable
     {
         StringBuffer buffer = new StringBuffer();
 
-        for(int i = 0; i < ingredients.length; ++i)
+        for (int i = 0; i < ingredients.length; ++i)
         {
             buffer.append(ingredients[i].toString());
 
-            if(i != ingredients.length - 1)
+            if (i != ingredients.length - 1)
             {
                 buffer.append(", ");
             }
@@ -75,11 +76,11 @@ public class Recipe implements JSONSerializable
     {
         StringBuffer buffer = new StringBuffer();
 
-        for(int i = 0; i < preparationSteps.length; ++i)
+        for (int i = 0; i < preparationSteps.length; ++i)
         {
             buffer.append(preparationSteps[i].getDisplayString());
 
-            if(i != preparationSteps.length - 1)
+            if (i != preparationSteps.length - 1)
             {
                 buffer.append("\n");
             }
@@ -99,9 +100,9 @@ public class Recipe implements JSONSerializable
     }
 
     @Override
-    public JSONObject toJSON() {
+    public JSONObject toJSON()
+    {
         JSONObject jsonObject = new JSONObject();
-        JSONArray ingredientArray = new JSONArray();
         JSONArray prepArray = new JSONArray();
 
         try
@@ -111,16 +112,11 @@ public class Recipe implements JSONSerializable
             jsonObject.put("MealType", mealType.toString());
             jsonObject.put("PreparationTime", preparationTime);
 
-            for (Ingredient ingredient: ingredients) {
-                String ingredientName = ingredient.toString();
-                ingredientArray.put(ingredientName);
+            for (PreparationStep prepStep : preparationSteps)
+            {
+                prepArray.put(prepStep.getSpecificationString());
             }
-            jsonObject.put("Ingredients", ingredientArray);
 
-            for (PreparationStep prepStep: preparationSteps) {
-                String instruction = prepStep.toString();
-                prepArray.put(instruction);
-            }
             jsonObject.put("PreparationSteps", prepArray);
         }
         catch (JSONException e)
@@ -133,39 +129,43 @@ public class Recipe implements JSONSerializable
     }
 
     @Override
-    public void initializeFromJSON(JSONObject jsonObject) {
+    public void initializeFromJSON(JSONObject jsonObject)
+    {
         if (jsonObject != null)
         {
-            try
-            {
-                name = jsonObject.getString("Name");
-                culturalCategory = new CulturalCategory(jsonObject.getString("CulturalCategory"));
-                mealType = new MealType(jsonObject.getString("MealType"));
-                preparationTime = jsonObject.getInt("PreparationTime");
-
-                JSONArray ingredientArray = jsonObject.getJSONArray("Ingredients");
-                ingredients = new Ingredient[ingredientArray.length()];
-                for (int i = 0; i < ingredientArray.length(); i++) {
-                    ingredients[i] = new Ingredient((String)ingredientArray.get(i));
-                }
-
-                JSONArray prepSteps = jsonObject.getJSONArray("PreparationSteps");
-                preparationSteps = new PreparationStep[prepSteps.length()];
-                for (int i = 0; i < prepSteps.length(); i++) {
-                    preparationSteps[i] = new PreparationStep((String)prepSteps.get(i));
-                }
-
-
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
+            RecipeBuilder.buildFromJson(recipeBook, this, jsonObject);
         }
         else
         {
             throw new NullPointerException("JSON Object is null. Cannot Initialize");
         }
+    }
 
+    public boolean equals(Recipe other)
+    {
+        boolean equals = true;
+        equals = equals && this.name == other.name;
+        equals = equals && culturalCategory.equals(other.culturalCategory);
+        equals = equals && mealType.equals(other.mealType);
+        equals = equals && this.preparationTime == other.preparationTime;
+        equals = equals && this.getIngredientsEnumeration().equals(other.getIngredientsEnumeration());
+        equals = equals && this.getPreparationStepEnumeration().equals(other.getIngredientsEnumeration());
+
+        return equals;
+    }
+
+    public Ingredient[] getIngredients()
+    {
+        return ingredients;
+    }
+
+    public void setInfo(String name, CulturalCategory culturalCategory, MealType mealType, int preparationTime, Ingredient[] ingredients, PreparationStep[] preparationSteps)
+    {
+        this.name = name;
+        this.culturalCategory = culturalCategory;
+        this.mealType = mealType;
+        this.preparationTime = preparationTime;
+        this.ingredients = ingredients;
+        this.preparationSteps = preparationSteps;
     }
 }

@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.qwerty123.cookhelper.Utils.Utils;
 import com.qwerty123.cookhelper.View.Fragments.AdvancedSearchFragment;
 import com.qwerty123.cookhelper.View.Fragments.HelpFragment;
 import com.qwerty123.cookhelper.View.Fragments.RecipeBookFragment;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //Set the application context to be used by other classes that do not have access to a context.
+        Utils.setApplicationContext(this);
 
         configureFAB();
         configureDrawer(toolbar);

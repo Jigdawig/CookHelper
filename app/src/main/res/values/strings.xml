@@ -54,7 +54,7 @@
     <string name="recipe_index_extra">recipe_index</string>
 
     <!-- Save recipe Resources -->
-    <string name="json_recipe_savefile">RecipeDB.json</string>
+    <string name="recipe_book_filename">recipes.json</string>
 
     <!-- temporary resources for debug or placeholding -->
 

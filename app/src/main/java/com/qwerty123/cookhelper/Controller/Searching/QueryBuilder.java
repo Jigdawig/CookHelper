@@ -2,7 +2,7 @@ package com.qwerty123.cookhelper.Controller.Searching;
 
 import android.support.annotation.NonNull;
 
-import com.qwerty123.cookhelper.Utils;
+import com.qwerty123.cookhelper.Utils.Utils;
 
 import java.util.Scanner;
 

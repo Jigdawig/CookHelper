@@ -15,7 +15,7 @@ import com.qwerty123.cookhelper.Controller.Searching.Query;
 import com.qwerty123.cookhelper.Controller.Searching.QueryBuilder;
 import com.qwerty123.cookhelper.Controller.Searching.SearchController;
 import com.qwerty123.cookhelper.R;
-import com.qwerty123.cookhelper.Utils;
+import com.qwerty123.cookhelper.Utils.Utils;
 
 public class AdvancedSearchFragment extends Fragment implements View.OnClickListener
 {
