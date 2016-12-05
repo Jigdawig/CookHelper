@@ -44,6 +44,10 @@ public class RecipeBookSaveController
                 }
             }
         }
+        else
+        {
+            recipes = new Recipe[0];
+        }
 
         recipeBook.setRecipeList(recipes);
     }

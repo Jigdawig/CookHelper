@@ -32,7 +32,7 @@ public class RecipeBook
 
         categories = new HashMap<>();
         types = new HashMap<>();
-        ingredients= new HashMap<>();
+        ingredients = new HashMap<>();
     }
 
     public Recipe[] getRecipeArray()
@@ -61,7 +61,7 @@ public class RecipeBook
             String recipeName = recipe.getName();
             boolean nameEquals = recipeName.equals(name);
 
-            if(nameEquals)
+            if (nameEquals)
             {
                 return recipe;
             }
@@ -75,7 +75,7 @@ public class RecipeBook
         categoryName = categoryName.toLowerCase();
         CulturalCategory category;
 
-        if(categories.containsKey(categoryName))
+        if (categories.containsKey(categoryName))
         {
             category = categories.get(categoryName);
         }
@@ -93,7 +93,7 @@ public class RecipeBook
         typeName = typeName.toLowerCase();
         MealType type;
 
-        if(types.containsKey(typeName))
+        if (types.containsKey(typeName))
         {
             type = types.get(typeName);
         }
@@ -111,7 +111,7 @@ public class RecipeBook
         ingredientName = ingredientName.toLowerCase();
         Ingredient ingredient;
 
-        if(ingredients.containsKey(ingredientName))
+        if (ingredients.containsKey(ingredientName))
         {
             ingredient = ingredients.get(ingredientName);
         }
@@ -133,7 +133,7 @@ public class RecipeBook
         category.addRecipe(recipe);
         mealType.addRecipe(recipe);
 
-        for(Ingredient ingredient : ingredients)
+        for (Ingredient ingredient : ingredients)
         {
             ingredient.addRecipe(recipe);
         }
@@ -141,23 +141,23 @@ public class RecipeBook
 
     public void addNewRecipe(Recipe recipe)
     {
-        if(recipe != null)
+        if (recipe != null)
         {
             recipes.add(recipe);
         }
     }
 
-    public void deleteRecipe(int index)
+    public void deleteRecipeAtPosition(int index)
     {
-        if( index >= 0 && index < recipes.size())
+        if (index >= 0 && index < recipes.size())
         {
             recipes.remove(index);
         }
     }
 
-    public void overwriteRecipe(int index, Recipe recipe)
+    public void overwriteRecipeAtPosition(int index, Recipe recipe)
     {
-        if(index >= 0 && index < recipes.size())
+        if (index >= 0 && index < recipes.size())
         {
             recipes.set(index, recipe);
         }
@@ -165,7 +165,7 @@ public class RecipeBook
 
     public void setRecipeList(Recipe[] recipeArray)
     {
-        this.recipes =new ArrayList<Recipe>(Arrays.asList(recipeArray));
+        this.recipes = new ArrayList<Recipe>(Arrays.asList(recipeArray));
     }
 
     public boolean hasCategory(String category)
@@ -187,9 +187,9 @@ public class RecipeBook
     {
         HashSet<Recipe> recipes = new HashSet<>();
 
-        for(Recipe recipe : this.recipes)
+        for (Recipe recipe : this.recipes)
         {
-            if(recipe.getPreparationTime() <= prepTime)
+            if (recipe.getPreparationTime() <= prepTime)
             {
                 recipes.add(recipe);
             }
@@ -200,9 +200,9 @@ public class RecipeBook
 
     public int getRecipeIndex(String recipeName)
     {
-        for(int i = 0; i < recipes.size(); ++i)
+        for (int i = 0; i < recipes.size(); ++i)
         {
-            if(recipes.get(i).getName().equals(recipeName))
+            if (recipes.get(i).getName().equals(recipeName))
             {
                 return i;
             }

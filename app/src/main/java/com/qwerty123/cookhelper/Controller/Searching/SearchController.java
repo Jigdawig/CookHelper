@@ -1,7 +1,5 @@
 package com.qwerty123.cookhelper.Controller.Searching;
 
-import android.support.v4.util.Pair;
-
 import com.qwerty123.cookhelper.Model.RecipeBook.CulturalCategory;
 import com.qwerty123.cookhelper.Model.RecipeBook.Ingredient;
 import com.qwerty123.cookhelper.Model.RecipeBook.MealType;
@@ -88,7 +86,6 @@ public class SearchController
         if (query.hasIngredientCriteria())
         {
             //Handle required ingredients first
-
             if (query.hasRequiredIngredients())
             {
                 ArrayList<String> ingredientNames = query.getRequiredIngredients();

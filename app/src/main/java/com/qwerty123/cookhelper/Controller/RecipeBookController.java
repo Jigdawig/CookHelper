@@ -26,7 +26,7 @@ public class RecipeBookController
 
     public static void deleteRecipe(int position)
     {
-        recipeBook.deleteRecipe(position);
+        recipeBook.deleteRecipeAtPosition(position);
         RecipeBookSaveController.saveRecipes(recipeBook);
     }
 
@@ -40,7 +40,7 @@ public class RecipeBookController
     public static void overwriteRecipe(int index, String name, String category, String type, int prepTime, String[] steps)
     {
         Recipe recipe = RecipeBuilder.buildRecipe(recipeBook, name, category, type, prepTime, steps);
-        recipeBook.overwriteRecipe(index, recipe);
+        recipeBook.overwriteRecipeAtPosition(index, recipe);
         RecipeBookSaveController.saveRecipes(recipeBook);
     }
 
