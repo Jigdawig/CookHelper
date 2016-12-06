@@ -17,4 +17,8 @@ public class RecipeTable
         recipes.add(recipe);
     }
 
+    public void removeRecipe(Recipe recipe)
+    {
+        recipes.remove(recipe);
+    }
 }

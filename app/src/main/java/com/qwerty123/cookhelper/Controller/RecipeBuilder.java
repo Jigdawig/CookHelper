@@ -37,7 +37,7 @@ public class RecipeBuilder
 
         Recipe recipe = new Recipe(recipeBook, name, culturalCategory, mealType, prepTime, ingredientsArray, preparationSteps);
 
-        recipeBook.updateLookupTables(recipe);
+        //recipeBook.addToLookupTables(recipe);
 
         return recipe;
     }

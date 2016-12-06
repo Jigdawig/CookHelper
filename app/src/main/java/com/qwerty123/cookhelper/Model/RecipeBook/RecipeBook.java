@@ -124,7 +124,7 @@ public class RecipeBook
         return ingredient;
     }
 
-    public void updateLookupTables(Recipe recipe)
+    public void addToLookupTables(Recipe recipe)
     {
         CulturalCategory category = recipe.getCulturalCategory();
         MealType mealType = recipe.getMealType();
@@ -139,11 +139,27 @@ public class RecipeBook
         }
     }
 
+    private void removeFromLookupTables(Recipe recipe)
+    {
+        CulturalCategory category = recipe.getCulturalCategory();
+        MealType mealType = recipe.getMealType();
+        Ingredient[] ingredients = recipe.getIngredients();
+
+        category.removeRecipe(recipe);
+        mealType.removeRecipe(recipe);
+
+        for (Ingredient ingredient : ingredients)
+        {
+            ingredient.removeRecipe(recipe);
+        }
+    }
+
     public void addNewRecipe(Recipe recipe)
     {
         if (recipe != null)
         {
             recipes.add(recipe);
+            addToLookupTables(recipe);
         }
     }
 
@@ -151,6 +167,8 @@ public class RecipeBook
     {
         if (index >= 0 && index < recipes.size())
         {
+            Recipe oldRecipe = recipes.get(index);
+            removeFromLookupTables(oldRecipe);
             recipes.remove(index);
         }
     }
@@ -159,9 +177,13 @@ public class RecipeBook
     {
         if (index >= 0 && index < recipes.size())
         {
+            Recipe oldRecipe = recipes.get(index);
+            removeFromLookupTables(oldRecipe);
             recipes.set(index, recipe);
+            addToLookupTables(recipe);
         }
     }
+
 
     public void setRecipeList(Recipe[] recipeArray)
     {

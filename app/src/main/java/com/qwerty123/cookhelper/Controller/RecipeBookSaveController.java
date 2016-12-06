@@ -18,7 +18,7 @@ public class RecipeBookSaveController
 
         for (Recipe recipe : recipeBook.getRecipeArray())
         {
-            recipeBook.updateLookupTables(recipe);
+            recipeBook.addToLookupTables(recipe);
         }
     }
 

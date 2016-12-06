@@ -33,7 +33,9 @@ public class RecipeDetailViewActivity extends AppCompatActivity
     {
         super.onResume();
 
-        if(recipe != null)
+        recipe = getRecipeReference();
+
+        if (recipe != null)
         {
             updateDisplay();
         }
