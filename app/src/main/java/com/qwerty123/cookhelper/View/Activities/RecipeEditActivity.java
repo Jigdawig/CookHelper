@@ -16,6 +16,11 @@ import com.qwerty123.cookhelper.Controller.RecipeBookController;
 import com.qwerty123.cookhelper.R;
 import com.qwerty123.cookhelper.Utils.Utils;
 
+import java.util.ArrayList;
+
+/**
+ * Implements the functionality to allow the user to edit a recipe.
+ */
 public class RecipeEditActivity extends AppCompatActivity implements View.OnClickListener
 {
     private static final int STARTING_STEPS = 4;
@@ -176,18 +181,24 @@ public class RecipeEditActivity extends AppCompatActivity implements View.OnClic
 
     private String[] obtainSteps()
     {
-        int numSteps = stepsLayout.getChildCount();
+        ArrayList<String> steps = new ArrayList<>(stepsLayout.getChildCount());
 
-        String[] recipeSteps = new String[numSteps];
-
-        for(int i = 0; i < numSteps; ++i)
+        for(int i = 0; i < stepsLayout.getChildCount(); ++i)
         {
             View editStepItem = stepsLayout.getChildAt(i);
 
             EditText instructionField = (EditText)editStepItem .findViewById(R.id.SEI_instructions_field);
 
-            recipeSteps[i] = instructionField.getText().toString();
+            String stepInfo = instructionField.getText().toString();
+
+            if(!stepInfo.isEmpty())
+            {
+                steps.add(i, stepInfo);
+            }
         }
+
+        String[] recipeSteps = new String[steps.size()];
+        steps.toArray(recipeSteps);
 
         return recipeSteps;
     }

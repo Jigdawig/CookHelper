@@ -10,6 +10,9 @@ import android.widget.TextView;
 import com.qwerty123.cookhelper.Model.RecipeBook.Recipe;
 import com.qwerty123.cookhelper.R;
 
+/**
+ * An adapter to inflate list items representing a recipe.
+ */
 public class RecipeListAdapter extends ArrayAdapter<Recipe>
 {
     public RecipeListAdapter(Context context, int resource, Recipe[] objects)

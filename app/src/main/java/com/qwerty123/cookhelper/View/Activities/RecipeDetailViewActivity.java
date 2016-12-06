@@ -10,6 +10,10 @@ import com.qwerty123.cookhelper.Model.RecipeBook.Recipe;
 import com.qwerty123.cookhelper.Controller.RecipeBookController;
 import com.qwerty123.cookhelper.R;
 
+/**
+ * Implements the functionality to view the details of a recipe, such as the name, the category,
+ * and other relevant details.
+ */
 public class RecipeDetailViewActivity extends AppCompatActivity
 {
     Recipe recipe;

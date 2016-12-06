@@ -6,6 +6,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+/**
+ * Singleton class. A recipe book, along with some utility member variables. Represents a cook book with a list of
+ * recipes, and some tables to look up recipes based on preparation time, category, type and
+ * ingredients.
+ */
 public class RecipeBook
 {
     private static RecipeBook recipeBook;
@@ -16,6 +21,9 @@ public class RecipeBook
 
     private ArrayList<Recipe> recipes;
 
+    /**
+     * @return the only instance of RecipeBook.
+     */
     public static RecipeBook getInstance()
     {
         if (recipeBook == null)
@@ -35,12 +43,19 @@ public class RecipeBook
         ingredients = new HashMap<>();
     }
 
+    /**
+     * @return the list of recipes.
+     */
     public Recipe[] getRecipeArray()
     {
         Recipe[] recipesArray = new Recipe[recipes.size()];
         return recipes.toArray(recipesArray);
     }
 
+    /**
+     * @param index position of the recipe
+     * @return the recipe
+     */
     public Recipe getRecipe(int index)
     {
         if (index < recipes.size())
@@ -53,6 +68,10 @@ public class RecipeBook
         }
     }
 
+    /**
+     * @param name the name of the recipe.
+     * @return the recipe.
+     */
     public Recipe getRecipe(String name)
     {
         for (int i = 0; i < recipes.size(); i++)
@@ -70,6 +89,11 @@ public class RecipeBook
         return null;
     }
 
+    /**
+     * Returns or creates and returns a category with the matching name.
+     * @param categoryName the name of the category expected to be returned.
+     * @return
+     */
     public CulturalCategory getCategory(String categoryName)
     {
         categoryName = categoryName.toLowerCase();
@@ -88,6 +112,11 @@ public class RecipeBook
         return category;
     }
 
+    /**
+     * Returns or creates and returns a type with the matching name.
+     * @param typeName the name of the type expected to be returned.
+     * @return
+     */
     public MealType getMealType(String typeName)
     {
         typeName = typeName.toLowerCase();
@@ -106,6 +135,11 @@ public class RecipeBook
         return type;
     }
 
+    /**
+     * Returns or creates and returns a ingredient with the matching name.
+     * @param ingredientName the name of the ingredient expected to be returned.
+     * @return
+     */
     public Ingredient getIngredient(String ingredientName)
     {
         ingredientName = ingredientName.toLowerCase();
@@ -124,6 +158,9 @@ public class RecipeBook
         return ingredient;
     }
 
+    /**
+     * @param recipe to be added to the lookup tables.
+     */
     public void addToLookupTables(Recipe recipe)
     {
         CulturalCategory category = recipe.getCulturalCategory();
@@ -139,6 +176,9 @@ public class RecipeBook
         }
     }
 
+    /**
+     * @param recipe to be removed from the lookup tables.
+     */
     private void removeFromLookupTables(Recipe recipe)
     {
         CulturalCategory category = recipe.getCulturalCategory();
@@ -154,6 +194,9 @@ public class RecipeBook
         }
     }
 
+    /**
+     * @param recipe to be added to the RecipeBook.
+     */
     public void addNewRecipe(Recipe recipe)
     {
         if (recipe != null)
@@ -163,6 +206,9 @@ public class RecipeBook
         }
     }
 
+    /**
+     * @param index position of the recipe to be deleted.
+     */
     public void deleteRecipeAtPosition(int index)
     {
         if (index >= 0 && index < recipes.size())
@@ -173,6 +219,10 @@ public class RecipeBook
         }
     }
 
+    /**
+     * @param index position of the recipe to be overwritten.
+     * @param recipe the new recipe to be saved.
+     */
     public void overwriteRecipeAtPosition(int index, Recipe recipe)
     {
         if (index >= 0 && index < recipes.size())
@@ -183,7 +233,6 @@ public class RecipeBook
             addToLookupTables(recipe);
         }
     }
-
 
     public void setRecipeList(Recipe[] recipeArray)
     {
@@ -205,6 +254,10 @@ public class RecipeBook
         return ingredients.containsKey(ingredient);
     }
 
+    /**
+     * @param prepTime the preparation time desired.
+     * @return a set of recipes which have the preparation time specified or lower.
+     */
     public HashSet<Recipe> getRecipesPreparedBelow(int prepTime)
     {
         HashSet<Recipe> recipes = new HashSet<>();
@@ -220,6 +273,10 @@ public class RecipeBook
         return recipes;
     }
 
+    /**
+     * @param recipeName
+     * @return the index of the recipe.
+     */
     public int getRecipeIndex(String recipeName)
     {
         for (int i = 0; i < recipes.size(); ++i)

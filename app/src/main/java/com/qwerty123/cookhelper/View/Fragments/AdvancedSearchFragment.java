@@ -22,6 +22,9 @@ import com.qwerty123.cookhelper.View.Activities.SearchResultActivity;
 
 import java.util.ArrayList;
 
+/**
+ * Fragment implementing the functionality for recipes to search by filtering the many attributes of a recipe.
+ */
 public class AdvancedSearchFragment extends Fragment implements View.OnClickListener
 {
     @Override

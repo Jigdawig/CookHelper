@@ -3,11 +3,18 @@ package com.qwerty123.cookhelper.Model.RecipeBook;
 import com.qwerty123.cookhelper.Model.RecipeTable;
 import com.qwerty123.cookhelper.Utils.Utils;
 
+/**
+ * Represents a given ingredient. Can be food or spices.
+ */
 public class Ingredient extends RecipeTable
 {
     private String name;
     private String displayName;
 
+    /**
+     * @param name containing no whitespaces. Use underscores to speparate words. Creates a string
+     *             for display purposes.
+     */
     public Ingredient(String name)
     {
         if (name.length() == 0)
@@ -19,6 +26,9 @@ public class Ingredient extends RecipeTable
         displayName = Utils.createDisplayName(name);
     }
 
+    /**
+     * @return the name with underscores.
+     */
     public String getName()
     {
         return name;
@@ -30,6 +40,9 @@ public class Ingredient extends RecipeTable
         return name;
     }
 
+    /**
+     * @return a string for display.
+     */
     public String getDisplayName()
     {
         return displayName;

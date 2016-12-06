@@ -14,8 +14,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
+
 /**
- * Created by David on 2016-10-01.
+ * A class which reads and writes JSON files from Android's local storage.
  */
 public class JSONSerializer
 {

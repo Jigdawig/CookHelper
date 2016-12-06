@@ -15,6 +15,9 @@ import com.qwerty123.cookhelper.View.RecipeListAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * Implements the functionality to allow the user to view the results of a search.
+ */
 public class SearchResultActivity extends AppCompatActivity implements AdapterView.OnItemClickListener
 {
 

@@ -15,10 +15,24 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * In charge of creating recipes, either with input from the user, or from JSON objects created
+ * by reading the JSON file.
+ */
 public class RecipeBuilder
 {
     private static final char INGREDIENT_TOKEN = '#';
 
+    /**
+     * Build a recipe using the provided inputs and puts it in the RecipeBook
+     * @param recipeBook
+     * @param name
+     * @param category
+     * @param type
+     * @param prepTime
+     * @param steps
+     * @return the new recipe
+     */
     public static Recipe buildRecipe(RecipeBook recipeBook, String name, String category, String type, int prepTime, String[] steps)
     {
         CulturalCategory culturalCategory = recipeBook.getCategory(category);
@@ -42,6 +56,14 @@ public class RecipeBuilder
         return recipe;
     }
 
+    /**
+     * Parses the string that represents the steps of a recipe. In doing so, obtains a reference
+     * to all relevant ingredients used in an individual step, for each step.
+     * @param recipeBook
+     * @param specificationString
+     * @param ingredientsOut
+     * @return
+     */
     private static PreparationStep parseSpecificationString(RecipeBook recipeBook, String specificationString, ArrayList<Ingredient> ingredientsOut)
     {
         ArrayList<String> ingredientNames = new ArrayList<String>();
@@ -79,6 +101,13 @@ public class RecipeBuilder
         return new PreparationStep(specificationString, displayString.toString(), ingredientsArray);
     }
 
+    /**
+     * Build a recipe from JSON representation and uses categories, types, and ingredients from the
+     * RecipeBook.
+     * @param recipeBook
+     * @param recipe
+     * @param jsonObject
+     */
     public static void buildFromJson(RecipeBook recipeBook, Recipe recipe, JSONObject jsonObject)
     {
         if(recipeBook != null && recipe != null && jsonObject != null)
@@ -107,7 +136,7 @@ public class RecipeBuilder
             }
             catch (JSONException e)
             {
-                //There is nothing to be done in terms of error handling.
+                recipe.setInfo("ERROR PARSING JSON", new CulturalCategory("ERROR"), new MealType("ERROR"), 0, new Ingredient[0], new PreparationStep[0]);
                 e.printStackTrace();
             }
         }

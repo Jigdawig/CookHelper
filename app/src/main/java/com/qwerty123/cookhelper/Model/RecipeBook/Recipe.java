@@ -7,8 +7,10 @@ import org.json.JSONObject;
 import com.qwerty123.cookhelper.Controller.RecipeBuilder;
 import com.qwerty123.cookhelper.Utils.JSONSerialization.JSONSerializable;
 
-import java.util.ArrayList;
-
+/**
+ * Represents a recipe, with a name, a cultural category, a meal type, a preparation time,
+ * a list of ingredients, and a list of steps.
+ */
 public class Recipe implements JSONSerializable
 {
     private RecipeBook recipeBook;
@@ -28,11 +30,15 @@ public class Recipe implements JSONSerializable
         setInfo(name, culturalCategory, mealType, preparationTime, ingredients, preparationSteps);
     }
 
-    //Constructor initialize recipe from a json Object
-    public Recipe(RecipeBook recipeBook, JSONObject recipe)
+    /**
+     * Creates a recipe from a JSON object.
+     * @param recipeBook the book to be added to, and from which to get categories and ingredients
+     * @param jsonRecipe a JSON object representing the recipe.
+     */
+    public Recipe(RecipeBook recipeBook, JSONObject jsonRecipe)
     {
         this.recipeBook = recipeBook;
-        initializeFromJSON(recipe);
+        initializeFromJSON(jsonRecipe);
     }
 
     public String getName()
@@ -55,6 +61,9 @@ public class Recipe implements JSONSerializable
         return preparationTime;
     }
 
+    /**
+     * @return a neat string to enumerate the ingredients used.
+     */
     public String getIngredientsEnumeration()
     {
         StringBuffer buffer = new StringBuffer();
@@ -72,6 +81,9 @@ public class Recipe implements JSONSerializable
         return buffer.toString();
     }
 
+    /**
+     * @return a neat string to enumerate the steps.
+     */
     public String getPreparationStepEnumeration()
     {
         StringBuilder builder = new StringBuilder();
@@ -99,6 +111,9 @@ public class Recipe implements JSONSerializable
         return preparationSteps;
     }
 
+    /**
+     * @return serializes a recipe in a JSON object.
+     */
     @Override
     public JSONObject toJSON()
     {
@@ -128,6 +143,9 @@ public class Recipe implements JSONSerializable
         return jsonObject;
     }
 
+    /**
+     * @param jsonObject a JSON object from which to obtain member variable values.
+     */
     @Override
     public void initializeFromJSON(JSONObject jsonObject)
     {

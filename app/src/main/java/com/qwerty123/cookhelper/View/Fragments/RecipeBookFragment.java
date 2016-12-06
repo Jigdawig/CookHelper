@@ -21,6 +21,10 @@ import com.qwerty123.cookhelper.View.Activities.RecipeEditActivity;
 import com.qwerty123.cookhelper.View.RecipeListAdapter;
 import com.qwerty123.cookhelper.R;
 
+/**
+ * Fragment implementing the functionality to view the list of recipes, to navigate to the recipe's
+ * detailed view, to navigate to the edit recipe activity and to delete recipes.
+ */
 public class RecipeBookFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener
 {
     RecipeBook recipeBook;
@@ -98,8 +102,6 @@ public class RecipeBookFragment extends Fragment implements AdapterView.OnItemCl
                 editRecipeAtPosition(position);
             }
         });
-
-        //dialogueBuilder.setNegativeButton("cancel");
 
         dialogueBuilder.create().show();
 

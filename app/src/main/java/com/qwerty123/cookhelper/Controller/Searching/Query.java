@@ -1,8 +1,10 @@
 package com.qwerty123.cookhelper.Controller.Searching;
 
-
 import java.util.ArrayList;
 
+/**
+ * Represents a query made by the user to filter the recipes.
+ */
 public class Query
 {
     private String name;
@@ -11,6 +13,13 @@ public class Query
     private int prepTime;
     private IngredientQueryGroup ingredients;
 
+    /**
+     * @param name the name of the recipe as a string
+     * @param category the cultural category of the recipe(s) as a string
+     * @param type the meal type of the recipe(s) as a string
+     * @param prepTime the maximum preparation type of the recipe(s)
+     * @param ingredients the ingredients that are required, optional or to be excluded.
+     */
     public Query(String name, String category, String type, int prepTime, IngredientQueryGroup ingredients)
     {
         this.name = name;
@@ -55,6 +64,9 @@ public class Query
         return !ingredients.required.isEmpty();
     }
 
+    /**
+     * @return the list of strings representing the required ingredients.
+     */
     public ArrayList<String> getRequiredIngredients()
     {
         return ingredients.required;
@@ -65,6 +77,9 @@ public class Query
         return !ingredients.optional.isEmpty();
     }
 
+    /**
+     * @return the list of strings representing the optional ingredients.
+     */
     public ArrayList<String> getOptionalIngredients()
     {
         return ingredients.optional;
@@ -75,6 +90,9 @@ public class Query
         return !ingredients.exclude.isEmpty();
     }
 
+    /**
+     * @return the list of strings representing the excluded ingredients.
+     */
     public ArrayList<String> getExcludedIngredients()
     {
         return ingredients.exclude;

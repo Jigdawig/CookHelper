@@ -19,6 +19,11 @@ import com.qwerty123.cookhelper.View.Fragments.HelpFragment;
 import com.qwerty123.cookhelper.View.Fragments.RecipeBookFragment;
 import com.qwerty123.cookhelper.R;
 
+/**
+ * The main activity. This class implements the functionalty required to use a navigation drawer,
+ * and to switch between the three main fragments, RecipeBook, AdvancedSearch, and
+ * Help. Also handles the floating action button.
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener
 {
@@ -39,14 +44,6 @@ public class MainActivity extends AppCompatActivity
         configureNavigationView();
 
         switchToRecipeBook();
-
-        String s1 = "David";
-        String s2 = "David";
-
-        boolean bEqual = s1 == s2;
-        boolean bEqual2 = s1.contentEquals(s2);
-        boolean bEquals3 = s1.equals(s2);
-        boolean bEquals4 = s1.contains(s2);
     }
 
     private void configureNavigationView()
@@ -99,19 +96,6 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, RecipeEditActivity.class);
             startActivity(intent);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // int id = item.getItemId();
-
-//        if (id == R.id.action_settings)
-//        {
-//            return true;
-//        }
-
-        return true;
     }
 
     @Override

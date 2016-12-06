@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 
 import com.qwerty123.cookhelper.R;
 
+/**
+ * Fragment allowing for the display of helpful information for the user.
+ */
 public class HelpFragment extends Fragment
 {
 

@@ -14,6 +14,12 @@ public class SearchController
 {
     static private ArrayList<Recipe> lastResult = null;
 
+    /**
+     * @param query the query which specifies how the list of recipes should be filtered
+     * @return a list of recipes that matched the criteria. If there were optional ingredients
+     * in the query, the recipes are sorted in terms of relevance. Also stores the results locally
+     * to be retrievable by the associated view.
+     */
     public static ArrayList<Recipe> performSearch(Query query)
     {
         lastResult = search(query);
@@ -179,6 +185,9 @@ public class SearchController
         return results;
     }
 
+    /**
+     * @return the results of the last search.
+     */
     public static ArrayList<Recipe> getLastResults()
     {
         return lastResult;

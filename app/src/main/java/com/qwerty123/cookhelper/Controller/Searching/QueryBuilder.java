@@ -1,11 +1,15 @@
 package com.qwerty123.cookhelper.Controller.Searching;
 
 import android.support.annotation.NonNull;
-
 import com.qwerty123.cookhelper.Utils.Utils;
 
 import java.util.Scanner;
 
+/**
+ * A specialized class to construct a query. Queries are a little complex, and
+ * take two distinct steps to create, one to receive the name, category, type and prep time, and
+ * the other to parse the list of required, optional and excluded ingredients.
+ */
 public class QueryBuilder
 {
     String nameCriteria;
@@ -28,11 +32,20 @@ public class QueryBuilder
         ingredientQueryGroup = null;
     }
 
+    /**
+     * @return a query containing all the attributes passed to the constructor and the
+     * parseIngredientsCriteria method.
+     */
     public Query buildQuery()
     {
         return new Query(nameCriteria, categoryCriteria, typeCriteria, prepTimeCriteria, ingredientQueryGroup);
     }
 
+    /**
+     * @param ingredientCriteria a string representing the list of required, optional and excluded
+     *                           ingredients.
+     * @return a boolean representing the success or failure of the parsing process.
+     */
     public boolean parseIngredientCriteria(String ingredientCriteria)
     {
         if(ingredientCriteria != null && !ingredientCriteria.isEmpty())
@@ -127,6 +140,10 @@ public class QueryBuilder
         }
     }
 
+    /**
+     * @param token a string containing an operator (&, +, -)
+     * @return a substring without the operator.
+     */
     @NonNull
     private String removeOperatorFromToken(String token)
     {
@@ -134,6 +151,10 @@ public class QueryBuilder
         return token;
     }
 
+    /**
+     * @param token a string containing an operator
+     * @return a character representing that operator
+     */
     private char getOperator(String token)
     {
         char operator;
@@ -155,11 +176,19 @@ public class QueryBuilder
         return operator;
     }
 
+    /**
+     * @param token
+     * @return whether or not the string is long enough to be a word.
+     */
     private boolean checkParseIngredient(String token)
     {
         return token.length() > 1;
     }
 
+    /**
+     * @param token
+     * @return whether or not there is an operator in the token.
+     */
     private boolean checkParseOperator(String token)
     {
         char c;
